@@ -8,7 +8,7 @@ clean:
 	rm -Rf build/
 
 install:
-	pip install -e .[dev,docs]
+	pip install -e .[test,docs]
 
 sandbox: install
 	python sandbox/manage.py migrate
@@ -34,3 +34,11 @@ publish_release_testpypi: build_release
 
 publish_release: build_release
 	twine upload dist/*
+
+.dev:
+	pip install -e .[test,docs,devpy36]
+	touch .dev
+
+lint: .dev
+	pylint setup.py oscarapi/
+	black --check --exclude "migrations/*" setup.py oscarapi/**/*.py
