@@ -41,4 +41,4 @@ publish_release: build_release
 
 lint: .dev
 	pylint setup.py oscarapi/
-	black --check --exclude "migrations/*" setup.py oscarapi/**/*.py
+	black -l99 --check --exclude "migrations/*" setup.py oscarapi/**/*.py
